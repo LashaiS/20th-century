@@ -1,0 +1,261 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "47a04c99-f0e1-4a10-9e20-2380d36a6727",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "url = \"https://en.wikipedia.org/wiki/Key_events_of_the_20th_century\" "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "96645724-3b9c-4d6d-b0f4-cffcfea5e237",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import libraries\n",
+    "\n",
+    "import pandas as pd\n",
+    "import time\n",
+    "import selenium\n",
+    "import matplotlib.pyplot as plt \n",
+    "import os\n",
+    "import logging\n",
+    "from bs4 import BeautifulSoup\n",
+    "import requests"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "9c998b34-edbe-4a1c-90cd-f2e7215e1221",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "url = \"https://en.wikipedia.org/wiki/Key_events_of_the_20th_century\" "
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "a167176c-f081-41f5-ad35-38d08b41305f",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "403"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "response = requests.get(url)\n",
+    "response.status_code"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "bb73bcae-490f-4099-a98f-1af20d07d711",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "200"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import requests \n",
+    "\n",
+    "headers = { \"User-Agent\": \"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120 Safari/537.36\"\n",
+    "          }\n",
+    "response = requests.get(url, headers=headers)\n",
+    "response.status_code"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "id": "22d61c37-365f-463b-9cfe-cff9cf8aa374",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "# Import libraries\n",
+    "\n",
+    "import pandas as pd\n",
+    "import time\n",
+    "from selenium import webdriver\n",
+    "from webdriver_manager.chrome import ChromeDriverManager\n",
+    "from selenium.webdriver.common.by import By\n",
+    "from selenium.webdriver.chrome.options import Options\n",
+    "import matplotlib.pyplot as plt \n",
+    "import os\n",
+    "import logging"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "id": "18837021-a7f7-4ea7-8040-9b26b78e7a43",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Wikipedia\n"
+     ]
+    }
+   ],
+   "source": [
+    "\n",
+    "\n",
+    "driver_path = r\"C:\\Users\\shais\\Documents\\chromedriver-win64\\chromedriver.exe\"\n",
+    "\n",
+    "options = Options()\n",
+    "\n",
+    "driver = webdriver.Chrome(executable_path=driver_path, options=options)\n",
+    "\n",
+    "driver.get(\"https://www.wikipedia.org/\")\n",
+    "print(driver.title)\n",
+    "driver.quit()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "id": "b5ccf764-9567-474f-bc09-9f126c9a795a",
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "HTML length: 808655\n"
+     ]
+    }
+   ],
+   "source": [
+    "url = \"https://en.wikipedia.org/wiki/Key_events_of_the_20th_century\" \n",
+    "driver_path = r\"C:\\Users\\shais\\Documents\\chromedriver-win64\\chromedriver.exe\"\n",
+    "options = Options()\n",
+    "\n",
+    "driver = webdriver.Chrome(executable_path=driver_path, options=options)\n",
+    "driver.get(url)\n",
+    "time.sleep(3)\n",
+    "\n",
+    "html = driver.page_source\n",
+    "print(\"HTML length:\", len(html))\n",
+    "\n",
+    "driver.quit()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "id": "e3847169-e247-42b7-9d33-6e9bf3cad693",
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from bs4 import BeautifulSoup\n",
+    "\n",
+    "soup = BeautifulSoup(html, \"html.parser\")\n",
+    "text = soup.get_text()\n",
+    "text = text.encode(\"utf-8\")\n",
+    "with open(\"20th_century_wiki.txt\", \"wb\") as f:\n",
+    "    f.write(text)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "id": "2972f6a8-7402-4802-b540-8beded00e0a8",
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "['.ipynb_checkpoints',\n",
+       " '.virtual_documents',\n",
+       " '01 Intro to Data Analytics',\n",
+       " '02 Data Immersion',\n",
+       " '03 Data Visualizations with Python',\n",
+       " '04 Job Preparation',\n",
+       " '20th_century_wiki.txt',\n",
+       " 'Alice_Network_Analysis',\n",
+       " 'anaconda_projects',\n",
+       " 'chromedriver-win64',\n",
+       " 'chromedriver-win64.zip',\n",
+       " 'Custom Office Templates',\n",
+       " 'data portfolio',\n",
+       " 'desktop.ini',\n",
+       " 'Exercise 1.3',\n",
+       " 'Mexico 2024',\n",
+       " 'My Music',\n",
+       " 'My Pictures',\n",
+       " 'My Tableau Repository',\n",
+       " 'My Videos',\n",
+       " 'requirements.txt.txt',\n",
+       " 'Resumes',\n",
+       " 'TableauPublicDesktop-64bit-2025-3-2.exe',\n",
+       " 'Untitled.ipynb',\n",
+       " 'Van Sant Law',\n",
+       " '~$A4_final_report_template.xlsx',\n",
+       " '~$ercise 2.5.docx']"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import os \n",
+    "os.listdir()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "3cbdc732-b512-406a-9149-302738a42ed6",
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.14"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
