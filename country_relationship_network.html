@@ -1,0 +1,271 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+            <script src="lib/bindings/utils.js"></script>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/dist/vis-network.min.css" integrity="sha512-WgxfT5LWjfszlPHXRmBWHkV2eceiWTOBvrKCNbdgDYTHrT2AeLCGbF4sZlZw3UMN3WtL0tGUoIAKsu8mllg/XA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/vis-network/9.1.2/dist/vis-network.min.js" integrity="sha512-LnvoEWDFrqGHlHmDD2101OrLcbsfkrzoSpvtSQtxK3RMnRV0eOkhhBN2dXHKRrUU8p2DGRTk35n4O8nWSVe1mQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            
+        
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+        <link
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+          crossorigin="anonymous"
+        />
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+          crossorigin="anonymous"
+        ></script>
+
+
+        <center>
+          <h1></h1>
+        </center>
+        <style type="text/css">
+
+             #mynetwork {
+                 width: 1000px;
+                 height: 700px;
+                 background-color: #222222;
+                 border: 1px solid lightgray;
+                 position: relative;
+                 float: left;
+             }
+
+             
+             #loadingBar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width: 1000px;
+                 height: 700px;
+                 background-color:rgba(200,200,200,0.8);
+                 -webkit-transition: all 0.5s ease;
+                 -moz-transition: all 0.5s ease;
+                 -ms-transition: all 0.5s ease;
+                 -o-transition: all 0.5s ease;
+                 transition: all 0.5s ease;
+                 opacity:1;
+             }
+
+             #bar {
+                 position:absolute;
+                 top:0px;
+                 left:0px;
+                 width:20px;
+                 height:20px;
+                 margin:auto auto auto auto;
+                 border-radius:11px;
+                 border:2px solid rgba(30,30,30,0.05);
+                 background: rgb(0, 173, 246); /* Old browsers */
+                 box-shadow: 2px 0px 4px rgba(0,0,0,0.4);
+             }
+
+             #border {
+                 position:absolute;
+                 top:10px;
+                 left:10px;
+                 width:500px;
+                 height:23px;
+                 margin:auto auto auto auto;
+                 box-shadow: 0px 0px 4px rgba(0,0,0,0.2);
+                 border-radius:10px;
+             }
+
+             #text {
+                 position:absolute;
+                 top:8px;
+                 left:530px;
+                 width:30px;
+                 height:50px;
+                 margin:auto auto auto auto;
+                 font-size:22px;
+                 color: #000000;
+             }
+
+             div.outerBorder {
+                 position:relative;
+                 top:400px;
+                 width:600px;
+                 height:44px;
+                 margin:auto auto auto auto;
+                 border:8px solid rgba(0,0,0,0.1);
+                 background: rgb(252,252,252); /* Old browsers */
+                 background: -moz-linear-gradient(top,  rgba(252,252,252,1) 0%, rgba(237,237,237,1) 100%); /* FF3.6+ */
+                 background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(252,252,252,1)), color-stop(100%,rgba(237,237,237,1))); /* Chrome,Safari4+ */
+                 background: -webkit-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Chrome10+,Safari5.1+ */
+                 background: -o-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* Opera 11.10+ */
+                 background: -ms-linear-gradient(top,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* IE10+ */
+                 background: linear-gradient(to bottom,  rgba(252,252,252,1) 0%,rgba(237,237,237,1) 100%); /* W3C */
+                 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfcfc', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+                 border-radius:72px;
+                 box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+             }
+             
+
+             
+             #config {
+                 float: left;
+                 width: 400px;
+                 height: 600px;
+             }
+             
+
+             
+        </style>
+    </head>
+
+
+    <body>
+        <div class="card" style="width: 100%">
+            
+            
+            <div id="mynetwork" class="card-body"></div>
+        </div>
+
+        
+            <div id="loadingBar">
+              <div class="outerBorder">
+                <div id="text">0%</div>
+                <div id="border">
+                  <div id="bar"></div>
+                </div>
+              </div>
+            </div>
+        
+        
+            <div id="config"></div>
+        
+
+        <script type="text/javascript">
+
+              // initialize global variables.
+              var edges;
+              var nodes;
+              var allNodes;
+              var allEdges;
+              var nodeColors;
+              var originalNodes;
+              var network;
+              var container;
+              var options, data;
+              var filter = {
+                  item : '',
+                  property : '',
+                  value : []
+              };
+
+              
+
+              
+
+              // This method is responsible for drawing the graph, returns the drawn network
+              function drawGraph() {
+                  var container = document.getElementById('mynetwork');
+
+                  
+
+                  // parsing and collecting nodes and edges from the python
+                  nodes = new vis.DataSet([{"color": "#97c2fc", "font": {"color": "white"}, "id": "United States", "label": "United States", "shape": "dot", "size": 22}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Russia", "label": "Russia", "shape": "dot", "size": 41}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Japan", "label": "Japan", "shape": "dot", "size": 29}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Germany", "label": "Germany", "shape": "dot", "size": 25}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Canada", "label": "Canada", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "France", "label": "France", "shape": "dot", "size": 20}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Great Britain", "label": "Great Britain", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Italy", "label": "Italy", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "United Kingdom", "label": "United Kingdom", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Omaha Beach", "label": "Omaha Beach", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "North Korea", "label": "North Korea", "shape": "dot", "size": 12}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nazi Germany", "label": "Nazi Germany", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the United Kingdom", "label": "the United Kingdom", "shape": "dot", "size": 9}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "China", "label": "China", "shape": "dot", "size": 15}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Cuba", "label": "Cuba", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Guam", "label": "Guam", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Australia", "label": "Australia", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "India", "label": "India", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Pakistan", "label": "Pakistan", "shape": "dot", "size": 9}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Philippines", "label": "Philippines", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "South Korea", "label": "South Korea", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hawaii", "label": "Hawaii", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Israel", "label": "Israel", "shape": "dot", "size": 9}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Poland", "label": "Poland", "shape": "dot", "size": 11}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Finland", "label": "Finland", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Estonia", "label": "Estonia", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Einsatzgruppen", "label": "Einsatzgruppen", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Iran", "label": "Iran", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Iraq", "label": "Iraq", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Crimea", "label": "Crimea", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Persia", "label": "Persia", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Lithuania", "label": "Lithuania", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Saint Petersburg", "label": "Saint Petersburg", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bucharest", "label": "Bucharest", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Belarus", "label": "Belarus", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Romania", "label": "Romania", "shape": "dot", "size": 12}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Belgrade", "label": "Belgrade", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Latvia", "label": "Latvia", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Budapest", "label": "Budapest", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Czechoslovakia", "label": "Czechoslovakia", "shape": "dot", "size": 10}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Prague", "label": "Prague", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Leningrad", "label": "Leningrad", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vienna", "label": "Vienna", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Warsaw", "label": "Warsaw", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tsar", "label": "Tsar", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ukraine", "label": "Ukraine", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Whitehall", "label": "Whitehall", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the People\u0027s Republic of China", "label": "the People\u0027s Republic of China", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sofia", "label": "Sofia", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Stalin", "label": "Stalin", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Burma", "label": "Burma", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Manchuria", "label": "Manchuria", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Solomon Islands", "label": "Solomon Islands", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Borneo", "label": "Borneo", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Timor", "label": "Timor", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Changsha", "label": "Changsha", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Thailand", "label": "Thailand", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bali", "label": "Bali", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Between Germany", "label": "Between Germany", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Guangxi", "label": "Guangxi", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hong Kong", "label": "Hong Kong", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Malaya", "label": "Malaya", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "New Guinea", "label": "New Guinea", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Shanghai", "label": "Shanghai", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Signed", "label": "Signed", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Singapore", "label": "Singapore", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "West Germany", "label": "West Germany", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Quest for Empire", "label": "Quest for Empire", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nanjing", "label": "Nanjing", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Chongqing", "label": "Chongqing", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Austria", "label": "Austria", "shape": "dot", "size": 6}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "North Africa", "label": "North Africa", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Norway", "label": "Norway", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Wannsee", "label": "Wannsee", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Stalingrad", "label": "Stalingrad", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the Ottoman Empire", "label": "the Ottoman Empire", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sweden", "label": "Sweden", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Paris", "label": "Paris", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Empire", "label": "Empire", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "British Empire", "label": "British Empire", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the Russian Empire", "label": "the Russian Empire", "shape": "dot", "size": 5}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hungary", "label": "Hungary", "shape": "dot", "size": 12}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the Low Countries", "label": "the Low Countries", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Bulgaria", "label": "Bulgaria", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "East Germany", "label": "East Germany", "shape": "dot", "size": 7}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Albania", "label": "Albania", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Yugoslavia", "label": "Yugoslavia", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "America", "label": "America", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Greece", "label": "Greece", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "the People\u0027s Republic of Bangladesh", "label": "the People\u0027s Republic of Bangladesh", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "South Africa", "label": "South Africa", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Nagasaki", "label": "Nagasaki", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hiroshima", "label": "Hiroshima", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Mongolia", "label": "Mongolia", "shape": "dot", "size": 4}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Vietnam", "label": "Vietnam", "shape": "dot", "size": 8}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Antonia", "label": "Antonia", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Blumberg", "label": "Blumberg", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Becky", "label": "Becky", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ferreira", "label": "Ferreira", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Cambodia", "label": "Cambodia", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Laos", "label": "Laos", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Indochina", "label": "Indochina", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Korea", "label": "Korea", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Burgess", "label": "Burgess", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Hall", "label": "Hall", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Colin", "label": "Colin", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Egypt", "label": "Egypt", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tobruk", "label": "Tobruk", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Libya", "label": "Libya", "shape": "dot", "size": 3}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Cape Verde", "label": "Cape Verde", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Angola", "label": "Angola", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Denmark", "label": "Denmark", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Daniel", "label": "Daniel", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Sandford", "label": "Sandford", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Ghana", "label": "Ghana", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kenya", "label": "Kenya", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Schultz", "label": "Schultz", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "North Korea\u0027s", "label": "North Korea\u0027s", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "London", "label": "London", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "New York: Psychology Press", "label": "New York: Psychology Press", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Luxembourg", "label": "Luxembourg", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Belgium", "label": "Belgium", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Netherlands", "label": "Netherlands", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "M.V.", "label": "M.V.", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Keldysh", "label": "Keldysh", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Winston", "label": "Winston", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Churchill", "label": "Churchill", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "New Mexico", "label": "New Mexico", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Los Alamos", "label": "Los Alamos", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Neville", "label": "Neville", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Wylie", "label": "Wylie", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Morocco", "label": "Morocco", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Algeria", "label": "Algeria", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Serwadda", "label": "Serwadda", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Joseph", "label": "Joseph", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Kagaayi", "label": "Kagaayi", "shape": "dot", "size": 2}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Tokyo", "label": "Tokyo", "shape": "dot", "size": 1}, {"color": "#97c2fc", "font": {"color": "white"}, "id": "Iwo Jima", "label": "Iwo Jima", "shape": "dot", "size": 1}]);
+                  edges = new vis.DataSet([{"Count": 1, "from": "United States", "to": "Russia", "width": 1}, {"Count": 1, "from": "United States", "to": "Japan", "width": 1}, {"Count": 3, "from": "United States", "to": "Germany", "width": 1}, {"Count": 2, "from": "United States", "to": "Canada", "width": 1}, {"Count": 1, "from": "United States", "to": "France", "width": 1}, {"Count": 1, "from": "United States", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "United States", "to": "Italy", "width": 1}, {"Count": 1, "from": "United States", "to": "United Kingdom", "width": 1}, {"Count": 1, "from": "United States", "to": "Omaha Beach", "width": 1}, {"Count": 1, "from": "United States", "to": "North Korea", "width": 1}, {"Count": 1, "from": "United States", "to": "Nazi Germany", "width": 1}, {"Count": 1, "from": "United States", "to": "the United Kingdom", "width": 1}, {"Count": 1, "from": "United States", "to": "China", "width": 1}, {"Count": 1, "from": "United States", "to": "Cuba", "width": 1}, {"Count": 1, "from": "United States", "to": "Guam", "width": 1}, {"Count": 1, "from": "United States", "to": "Australia", "width": 1}, {"Count": 1, "from": "United States", "to": "India", "width": 1}, {"Count": 1, "from": "United States", "to": "Pakistan", "width": 1}, {"Count": 1, "from": "United States", "to": "Philippines", "width": 1}, {"Count": 1, "from": "United States", "to": "South Korea", "width": 1}, {"Count": 1, "from": "United States", "to": "Hawaii", "width": 1}, {"Count": 1, "from": "United States", "to": "Israel", "width": 1}, {"Count": 2, "from": "Russia", "to": "Germany", "width": 1}, {"Count": 1, "from": "Russia", "to": "Poland", "width": 1}, {"Count": 1, "from": "Russia", "to": "France", "width": 1}, {"Count": 2, "from": "Russia", "to": "Israel", "width": 1}, {"Count": 2, "from": "Russia", "to": "Japan", "width": 1}, {"Count": 2, "from": "Russia", "to": "the United Kingdom", "width": 1}, {"Count": 2, "from": "Russia", "to": "Finland", "width": 1}, {"Count": 2, "from": "Russia", "to": "Pakistan", "width": 1}, {"Count": 2, "from": "Russia", "to": "China", "width": 1}, {"Count": 2, "from": "Russia", "to": "North Korea", "width": 1}, {"Count": 2, "from": "Russia", "to": "India", "width": 1}, {"Count": 1, "from": "Russia", "to": "Estonia", "width": 1}, {"Count": 1, "from": "Russia", "to": "Canada", "width": 1}, {"Count": 1, "from": "Russia", "to": "Cuba", "width": 1}, {"Count": 1, "from": "Russia", "to": "Einsatzgruppen", "width": 1}, {"Count": 1, "from": "Russia", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "Russia", "to": "Iran", "width": 1}, {"Count": 1, "from": "Russia", "to": "Iraq", "width": 1}, {"Count": 1, "from": "Russia", "to": "Crimea", "width": 1}, {"Count": 1, "from": "Russia", "to": "Persia", "width": 1}, {"Count": 1, "from": "Russia", "to": "Lithuania", "width": 1}, {"Count": 1, "from": "Russia", "to": "Saint Petersburg", "width": 1}, {"Count": 1, "from": "Russia", "to": "Bucharest", "width": 1}, {"Count": 1, "from": "Russia", "to": "Belarus", "width": 1}, {"Count": 1, "from": "Russia", "to": "Romania", "width": 1}, {"Count": 1, "from": "Russia", "to": "Belgrade", "width": 1}, {"Count": 1, "from": "Russia", "to": "Latvia", "width": 1}, {"Count": 1, "from": "Russia", "to": "Budapest", "width": 1}, {"Count": 1, "from": "Russia", "to": "Czechoslovakia", "width": 1}, {"Count": 1, "from": "Russia", "to": "Prague", "width": 1}, {"Count": 1, "from": "Russia", "to": "Leningrad", "width": 1}, {"Count": 1, "from": "Russia", "to": "United Kingdom", "width": 1}, {"Count": 1, "from": "Russia", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Russia", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Russia", "to": "Tsar", "width": 1}, {"Count": 1, "from": "Russia", "to": "Ukraine", "width": 1}, {"Count": 1, "from": "Russia", "to": "Whitehall", "width": 1}, {"Count": 1, "from": "Russia", "to": "the People\u0027s Republic of China", "width": 1}, {"Count": 1, "from": "Russia", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Russia", "to": "Stalin", "width": 1}, {"Count": 2, "from": "Japan", "to": "Burma", "width": 1}, {"Count": 1, "from": "Japan", "to": "Germany", "width": 1}, {"Count": 2, "from": "Japan", "to": "Manchuria", "width": 1}, {"Count": 2, "from": "Japan", "to": "Italy", "width": 1}, {"Count": 2, "from": "Japan", "to": "Solomon Islands", "width": 1}, {"Count": 2, "from": "Japan", "to": "Guam", "width": 1}, {"Count": 1, "from": "Japan", "to": "China", "width": 1}, {"Count": 1, "from": "Japan", "to": "Borneo", "width": 1}, {"Count": 1, "from": "Japan", "to": "Timor", "width": 1}, {"Count": 1, "from": "Japan", "to": "Changsha", "width": 1}, {"Count": 1, "from": "Japan", "to": "Canada", "width": 1}, {"Count": 1, "from": "Japan", "to": "Thailand", "width": 1}, {"Count": 1, "from": "Japan", "to": "India", "width": 1}, {"Count": 1, "from": "Japan", "to": "Bali", "width": 1}, {"Count": 1, "from": "Japan", "to": "Between Germany", "width": 1}, {"Count": 1, "from": "Japan", "to": "Guangxi", "width": 1}, {"Count": 1, "from": "Japan", "to": "Hong Kong", "width": 1}, {"Count": 1, "from": "Japan", "to": "Malaya", "width": 1}, {"Count": 1, "from": "Japan", "to": "New Guinea", "width": 1}, {"Count": 1, "from": "Japan", "to": "Shanghai", "width": 1}, {"Count": 1, "from": "Japan", "to": "Signed", "width": 1}, {"Count": 1, "from": "Japan", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Japan", "to": "West Germany", "width": 1}, {"Count": 1, "from": "Japan", "to": "Quest for Empire", "width": 1}, {"Count": 1, "from": "Japan", "to": "Nanjing", "width": 1}, {"Count": 1, "from": "Japan", "to": "Philippines", "width": 1}, {"Count": 1, "from": "Japan", "to": "Chongqing", "width": 1}, {"Count": 5, "from": "Germany", "to": "France", "width": 1}, {"Count": 5, "from": "Germany", "to": "Poland", "width": 1}, {"Count": 4, "from": "Germany", "to": "United Kingdom", "width": 1}, {"Count": 1, "from": "Germany", "to": "Italy", "width": 1}, {"Count": 1, "from": "Germany", "to": "Finland", "width": 1}, {"Count": 1, "from": "Germany", "to": "Austria", "width": 1}, {"Count": 1, "from": "Germany", "to": "Belgrade", "width": 1}, {"Count": 1, "from": "Germany", "to": "Between Germany", "width": 1}, {"Count": 1, "from": "Germany", "to": "Budapest", "width": 1}, {"Count": 1, "from": "Germany", "to": "North Africa", "width": 1}, {"Count": 1, "from": "Germany", "to": "Norway", "width": 1}, {"Count": 1, "from": "Germany", "to": "Prague", "width": 1}, {"Count": 1, "from": "Germany", "to": "Signed", "width": 1}, {"Count": 1, "from": "Germany", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Germany", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Germany", "to": "Wannsee", "width": 1}, {"Count": 1, "from": "Germany", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Germany", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "Germany", "to": "Bucharest", "width": 1}, {"Count": 1, "from": "Germany", "to": "Stalingrad", "width": 1}, {"Count": 1, "from": "Germany", "to": "the Ottoman Empire", "width": 1}, {"Count": 1, "from": "Germany", "to": "Sweden", "width": 1}, {"Count": 3, "from": "France", "to": "United Kingdom", "width": 1}, {"Count": 2, "from": "France", "to": "Paris", "width": 1}, {"Count": 1, "from": "France", "to": "Empire", "width": 1}, {"Count": 1, "from": "France", "to": "Austria", "width": 1}, {"Count": 1, "from": "France", "to": "British Empire", "width": 1}, {"Count": 1, "from": "France", "to": "China", "width": 1}, {"Count": 1, "from": "France", "to": "Czechoslovakia", "width": 1}, {"Count": 1, "from": "France", "to": "India", "width": 1}, {"Count": 1, "from": "France", "to": "Israel", "width": 1}, {"Count": 1, "from": "France", "to": "North Korea", "width": 1}, {"Count": 1, "from": "France", "to": "Poland", "width": 1}, {"Count": 1, "from": "France", "to": "the Russian Empire", "width": 1}, {"Count": 1, "from": "France", "to": "Pakistan", "width": 1}, {"Count": 1, "from": "France", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "France", "to": "Hungary", "width": 1}, {"Count": 1, "from": "France", "to": "the United Kingdom", "width": 1}, {"Count": 1, "from": "France", "to": "the Low Countries", "width": 1}, {"Count": 2, "from": "Poland", "to": "Czechoslovakia", "width": 1}, {"Count": 1, "from": "Poland", "to": "Bulgaria", "width": 1}, {"Count": 1, "from": "Poland", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Poland", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Poland", "to": "Albania", "width": 1}, {"Count": 1, "from": "Poland", "to": "Romania", "width": 1}, {"Count": 1, "from": "Poland", "to": "United Kingdom", "width": 1}, {"Count": 1, "from": "Poland", "to": "Yugoslavia", "width": 1}, {"Count": 1, "from": "United Kingdom", "to": "America", "width": 1}, {"Count": 1, "from": "United Kingdom", "to": "Czechoslovakia", "width": 1}, {"Count": 3, "from": "Yugoslavia", "to": "Czechoslovakia", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "Albania", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "Bulgaria", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "Greece", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Yugoslavia", "to": "Romania", "width": 1}, {"Count": 1, "from": "Czechoslovakia", "to": "Bulgaria", "width": 1}, {"Count": 1, "from": "Czechoslovakia", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Czechoslovakia", "to": "Romania", "width": 1}, {"Count": 1, "from": "Czechoslovakia", "to": "Albania", "width": 1}, {"Count": 1, "from": "Czechoslovakia", "to": "Hungary", "width": 1}, {"Count": 3, "from": "India", "to": "Pakistan", "width": 1}, {"Count": 2, "from": "India", "to": "China", "width": 1}, {"Count": 1, "from": "India", "to": "Israel", "width": 1}, {"Count": 1, "from": "India", "to": "North Korea", "width": 1}, {"Count": 1, "from": "India", "to": "the People\u0027s Republic of Bangladesh", "width": 1}, {"Count": 1, "from": "India", "to": "the United Kingdom", "width": 1}, {"Count": 1, "from": "Pakistan", "to": "China", "width": 1}, {"Count": 1, "from": "Pakistan", "to": "Israel", "width": 1}, {"Count": 1, "from": "Pakistan", "to": "North Korea", "width": 1}, {"Count": 1, "from": "Pakistan", "to": "the People\u0027s Republic of Bangladesh", "width": 1}, {"Count": 1, "from": "Pakistan", "to": "the United Kingdom", "width": 1}, {"Count": 1, "from": "Italy", "to": "Between Germany", "width": 1}, {"Count": 1, "from": "Italy", "to": "Signed", "width": 1}, {"Count": 1, "from": "Burma", "to": "Bali", "width": 1}, {"Count": 1, "from": "Burma", "to": "China", "width": 1}, {"Count": 1, "from": "Burma", "to": "Borneo", "width": 1}, {"Count": 1, "from": "Burma", "to": "New Guinea", "width": 1}, {"Count": 1, "from": "Burma", "to": "Timor", "width": 1}, {"Count": 1, "from": "Burma", "to": "Solomon Islands", "width": 1}, {"Count": 1, "from": "Paris", "to": "the Low Countries", "width": 1}, {"Count": 1, "from": "Israel", "to": "China", "width": 1}, {"Count": 1, "from": "Israel", "to": "North Korea", "width": 1}, {"Count": 1, "from": "Israel", "to": "South Africa", "width": 1}, {"Count": 1, "from": "Israel", "to": "the United Kingdom", "width": 1}, {"Count": 2, "from": "Manchuria", "to": "China", "width": 1}, {"Count": 2, "from": "Nagasaki", "to": "Hiroshima", "width": 1}, {"Count": 1, "from": "the United Kingdom", "to": "Nazi Germany", "width": 1}, {"Count": 1, "from": "the United Kingdom", "to": "China", "width": 1}, {"Count": 1, "from": "the United Kingdom", "to": "North Korea", "width": 1}, {"Count": 1, "from": "Finland", "to": "Estonia", "width": 1}, {"Count": 1, "from": "Finland", "to": "Romania", "width": 1}, {"Count": 1, "from": "Finland", "to": "Lithuania", "width": 1}, {"Count": 1, "from": "Finland", "to": "Latvia", "width": 1}, {"Count": 1, "from": "Solomon Islands", "to": "Bali", "width": 1}, {"Count": 1, "from": "Solomon Islands", "to": "New Guinea", "width": 1}, {"Count": 1, "from": "Solomon Islands", "to": "Timor", "width": 1}, {"Count": 2, "from": "Estonia", "to": "Lithuania", "width": 1}, {"Count": 2, "from": "Estonia", "to": "Latvia", "width": 1}, {"Count": 1, "from": "Estonia", "to": "Romania", "width": 1}, {"Count": 1, "from": "Lithuania", "to": "Latvia", "width": 1}, {"Count": 1, "from": "Lithuania", "to": "Romania", "width": 1}, {"Count": 1, "from": "Guam", "to": "Malaya", "width": 1}, {"Count": 1, "from": "Guam", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Guam", "to": "Hong Kong", "width": 1}, {"Count": 1, "from": "Guam", "to": "Philippines", "width": 1}, {"Count": 1, "from": "Guam", "to": "Thailand", "width": 1}, {"Count": 1, "from": "Latvia", "to": "Romania", "width": 1}, {"Count": 2, "from": "China", "to": "North Korea", "width": 1}, {"Count": 1, "from": "China", "to": "Borneo", "width": 1}, {"Count": 1, "from": "China", "to": "Mongolia", "width": 1}, {"Count": 1, "from": "China", "to": "Vietnam", "width": 1}, {"Count": 1, "from": "China", "to": "Cuba", "width": 1}, {"Count": 1, "from": "Canada", "to": "Australia", "width": 1}, {"Count": 1, "from": "Canada", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "North Korea", "to": "Cuba", "width": 1}, {"Count": 1, "from": "North Korea", "to": "Vietnam", "width": 1}, {"Count": 1, "from": "North Korea", "to": "South Korea", "width": 1}, {"Count": 1, "from": "North Korea", "to": "Mongolia", "width": 1}, {"Count": 1, "from": "Australia", "to": "Great Britain", "width": 1}, {"Count": 1, "from": "Australia", "to": "Philippines", "width": 1}, {"Count": 1, "from": "Albania", "to": "Romania", "width": 1}, {"Count": 1, "from": "Albania", "to": "Bulgaria", "width": 1}, {"Count": 1, "from": "Albania", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Albania", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Albania", "to": "Greece", "width": 1}, {"Count": 1, "from": "Romania", "to": "Bulgaria", "width": 1}, {"Count": 1, "from": "Romania", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Romania", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Antonia", "to": "Blumberg", "width": 1}, {"Count": 1, "from": "Becky", "to": "Ferreira", "width": 1}, {"Count": 1, "from": "Philippines", "to": "Hong Kong", "width": 1}, {"Count": 1, "from": "Philippines", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Philippines", "to": "Thailand", "width": 1}, {"Count": 1, "from": "Philippines", "to": "Malaya", "width": 1}, {"Count": 1, "from": "Austria", "to": "British Empire", "width": 1}, {"Count": 1, "from": "Austria", "to": "Empire", "width": 1}, {"Count": 1, "from": "Austria", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Austria", "to": "the Russian Empire", "width": 1}, {"Count": 1, "from": "British Empire", "to": "Empire", "width": 1}, {"Count": 1, "from": "British Empire", "to": "Hungary", "width": 1}, {"Count": 1, "from": "British Empire", "to": "the Russian Empire", "width": 1}, {"Count": 1, "from": "Cambodia", "to": "Vietnam", "width": 1}, {"Count": 1, "from": "Cambodia", "to": "Laos", "width": 1}, {"Count": 1, "from": "Cambodia", "to": "Indochina", "width": 1}, {"Count": 1, "from": "Vietnam", "to": "Cuba", "width": 1}, {"Count": 1, "from": "Vietnam", "to": "Indochina", "width": 1}, {"Count": 1, "from": "Vietnam", "to": "Mongolia", "width": 1}, {"Count": 1, "from": "Vietnam", "to": "Korea", "width": 1}, {"Count": 1, "from": "Vietnam", "to": "Laos", "width": 1}, {"Count": 1, "from": "Bali", "to": "Timor", "width": 1}, {"Count": 1, "from": "Bali", "to": "New Guinea", "width": 1}, {"Count": 1, "from": "Timor", "to": "New Guinea", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Prague", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Belgrade", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Budapest", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Bucharest", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Prague", "to": "Budapest", "width": 1}, {"Count": 1, "from": "Prague", "to": "Belgrade", "width": 1}, {"Count": 1, "from": "Prague", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Prague", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Prague", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Belarus", "to": "Leningrad", "width": 1}, {"Count": 1, "from": "Belarus", "to": "Saint Petersburg", "width": 1}, {"Count": 1, "from": "Belarus", "to": "Ukraine", "width": 1}, {"Count": 1, "from": "Leningrad", "to": "Saint Petersburg", "width": 1}, {"Count": 1, "from": "Leningrad", "to": "Ukraine", "width": 1}, {"Count": 1, "from": "Saint Petersburg", "to": "Ukraine", "width": 1}, {"Count": 1, "from": "Belgrade", "to": "Budapest", "width": 1}, {"Count": 1, "from": "Belgrade", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Belgrade", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Belgrade", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Bulgaria", "to": "East Germany", "width": 1}, {"Count": 1, "from": "Bulgaria", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Laos", "to": "Indochina", "width": 1}, {"Count": 1, "from": "Between Germany", "to": "Signed", "width": 1}, {"Count": 1, "from": "Budapest", "to": "Sofia", "width": 1}, {"Count": 1, "from": "Budapest", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Budapest", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Sofia", "to": "Vienna", "width": 1}, {"Count": 1, "from": "Sofia", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "Vienna", "to": "Warsaw", "width": 1}, {"Count": 1, "from": "East Germany", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Burgess", "to": "Hall", "width": 1}, {"Count": 1, "from": "Burgess", "to": "Colin", "width": 1}, {"Count": 1, "from": "Hall", "to": "Colin", "width": 1}, {"Count": 1, "from": "Empire", "to": "the Russian Empire", "width": 1}, {"Count": 1, "from": "Empire", "to": "Hungary", "width": 1}, {"Count": 1, "from": "the Russian Empire", "to": "Hungary", "width": 1}, {"Count": 1, "from": "Egypt", "to": "Tobruk", "width": 1}, {"Count": 1, "from": "Egypt", "to": "North Africa", "width": 1}, {"Count": 1, "from": "Egypt", "to": "Libya", "width": 1}, {"Count": 1, "from": "Cuba", "to": "Mongolia", "width": 1}, {"Count": 1, "from": "Cape Verde", "to": "Angola", "width": 1}, {"Count": 1, "from": "Changsha", "to": "Guangxi", "width": 1}, {"Count": 1, "from": "Chongqing", "to": "Shanghai", "width": 1}, {"Count": 1, "from": "Chongqing", "to": "Nanjing", "width": 1}, {"Count": 1, "from": "Shanghai", "to": "Nanjing", "width": 1}, {"Count": 1, "from": "Denmark", "to": "Norway", "width": 1}, {"Count": 1, "from": "Daniel", "to": "Sandford", "width": 1}, {"Count": 1, "from": "North Africa", "to": "Libya", "width": 1}, {"Count": 1, "from": "Thailand", "to": "Hong Kong", "width": 1}, {"Count": 1, "from": "Thailand", "to": "Malaya", "width": 1}, {"Count": 1, "from": "Thailand", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Iraq", "to": "Persia", "width": 1}, {"Count": 1, "from": "Iraq", "to": "Iran", "width": 1}, {"Count": 1, "from": "Persia", "to": "Iran", "width": 1}, {"Count": 1, "from": "Hong Kong", "to": "Malaya", "width": 1}, {"Count": 1, "from": "Hong Kong", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Malaya", "to": "Singapore", "width": 1}, {"Count": 1, "from": "Ghana", "to": "Kenya", "width": 1}, {"Count": 1, "from": "Iran", "to": "Libya", "width": 1}, {"Count": 1, "from": "Colin", "to": "Schultz", "width": 1}, {"Count": 1, "from": "Crimea", "to": "Whitehall", "width": 1}, {"Count": 1, "from": "South Korea", "to": "North Korea\u0027s", "width": 1}, {"Count": 1, "from": "London", "to": "New York: Psychology Press", "width": 1}, {"Count": 1, "from": "Luxembourg", "to": "Belgium", "width": 1}, {"Count": 1, "from": "Luxembourg", "to": "Netherlands", "width": 1}, {"Count": 1, "from": "Belgium", "to": "Netherlands", "width": 1}, {"Count": 1, "from": "M.V.", "to": "Keldysh", "width": 1}, {"Count": 1, "from": "Winston", "to": "Churchill", "width": 1}, {"Count": 1, "from": "New Mexico", "to": "Los Alamos", "width": 1}, {"Count": 1, "from": "Neville", "to": "Wylie", "width": 1}, {"Count": 1, "from": "Morocco", "to": "Algeria", "width": 1}, {"Count": 1, "from": "Serwadda", "to": "Joseph", "width": 1}, {"Count": 1, "from": "Serwadda", "to": "Kagaayi", "width": 1}, {"Count": 1, "from": "Joseph", "to": "Kagaayi", "width": 1}, {"Count": 1, "from": "Tokyo", "to": "Iwo Jima", "width": 1}]);
+
+                  nodeColors = {};
+                  allNodes = nodes.get({ returnType: "Object" });
+                  for (nodeId in allNodes) {
+                    nodeColors[nodeId] = allNodes[nodeId].color;
+                  }
+                  allEdges = edges.get({ returnType: "Object" });
+                  // adding nodes and edges to the graph
+                  data = {nodes: nodes, edges: edges};
+
+                  var options = {
+    "configure": {
+        "enabled": true,
+        "filter": true
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": true,
+            "type": "dynamic"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "repulsion": {
+            "centralGravity": 0.2,
+            "damping": 0.09,
+            "nodeDistance": 100,
+            "springConstant": 0.05,
+            "springLength": 200
+        },
+        "solver": "repulsion",
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+
+                  
+
+
+                  
+                  // if this network requires displaying the configure window,
+                  // put it in its div
+                  options.configure["container"] = document.getElementById("config");
+                  
+
+                  network = new vis.Network(container, data, options);
+
+                  
+
+                  
+
+                  
+
+
+                  
+                      network.on("stabilizationProgress", function(params) {
+                          document.getElementById('loadingBar').removeAttribute("style");
+                          var maxWidth = 496;
+                          var minWidth = 20;
+                          var widthFactor = params.iterations/params.total;
+                          var width = Math.max(minWidth,maxWidth * widthFactor);
+                          document.getElementById('bar').style.width = width + 'px';
+                          document.getElementById('text').innerHTML = Math.round(widthFactor*100) + '%';
+                      });
+                      network.once("stabilizationIterationsDone", function() {
+                          document.getElementById('text').innerHTML = '100%';
+                          document.getElementById('bar').style.width = '496px';
+                          document.getElementById('loadingBar').style.opacity = 0;
+                          // really clean the dom element
+                          setTimeout(function () {document.getElementById('loadingBar').style.display = 'none';}, 500);
+                      });
+                  
+
+                  return network;
+
+              }
+              drawGraph();
+        </script>
+    </body>
+</html>
