@@ -1,0 +1,340 @@
+Country1,Country2,Count
+United States,Russia,8
+United States,Japan,6
+Germany,Russia,5
+Germany,France,5
+Poland,Germany,5
+Germany,United Kingdom,4
+Poland,Russia,4
+Yugoslavia,Czechoslovakia,3
+India,Pakistan,3
+France,United Kingdom,3
+Germany,United States,3
+United States,Germany,3
+France,Russia,3
+Italy,Germany,3
+Japan,Burma,2
+France,Paris,2
+Japan,Germany,2
+Israel,Russia,2
+Japan,Manchuria,2
+Italy,Japan,2
+Japan,Russia,2
+Nagasaki,Hiroshima,2
+the United Kingdom,Russia,2
+Finland,Russia,2
+Russia,Germany,2
+Japan,Solomon Islands,2
+Estonia,Lithuania,2
+Japan,Guam,2
+Estonia,Latvia,2
+China,India,2
+China,Japan,2
+Canada,United States,2
+China,Manchuria,2
+China,North Korea,2
+Pakistan,Russia,2
+China,Russia,2
+North Korea,Russia,2
+United States,France,2
+India,Russia,2
+Czechoslovakia,Poland,2
+Australia,Great Britain,1
+Borneo,Japan,1
+Borneo,China,1
+Albania,Romania,1
+Albania,Yugoslavia,1
+America,United Kingdom,1
+Antonia,Blumberg,1
+Becky,Ferreira,1
+Australia,Philippines,1
+Austria,British Empire,1
+Cambodia,Vietnam,1
+Bali,Burma,1
+Bali,Timor,1
+Bucharest,Prague,1
+Belarus,Leningrad,1
+Belarus,Saint Petersburg,1
+Bucharest,Belgrade,1
+Bulgaria,Poland,1
+Cambodia,Laos,1
+Cambodia,Indochina,1
+Between Germany,Signed,1
+Estonia,Russia,1
+Estonia,Romania,1
+Budapest,Belgrade,1
+Budapest,Bucharest,1
+Budapest,Prague,1
+Budapest,Sofia,1
+Budapest,Vienna,1
+Budapest,Warsaw,1
+Bulgaria,Albania,1
+Bulgaria,Czechoslovakia,1
+Bulgaria,East Germany,1
+Bulgaria,Romania,1
+Burgess,Hall,1
+Burma,China,1
+Belgrade,Prague,1
+Empire,the Russian Empire,1
+Borneo,Burma,1
+Bali,New Guinea,1
+Estonia,Finland,1
+Egypt,Tobruk,1
+Japan,Timor,1
+Cuba,Vietnam,1
+Cuba,North Korea,1
+Canada,Russia,1
+Cape Verde,Angola,1
+Changsha,Guangxi,1
+Changsha,Japan,1
+China,Israel,1
+China,Mongolia,1
+China,Pakistan,1
+Cuba,Russia,1
+China,Vietnam,1
+Chongqing,Shanghai,1
+India,Israel,1
+Empire,Hungary,1
+Empire,France,1
+Denmark,Norway,1
+Canada,Australia,1
+Canada,Great Britain,1
+Canada,Japan,1
+Czechoslovakia,East Germany,1
+Czechoslovakia,Romania,1
+Daniel,Sandford,1
+East Germany,Albania,1
+Empire,British Empire,1
+East Germany,Poland,1
+East Germany,Romania,1
+Czechoslovakia,Albania,1
+Egypt,North Africa,1
+Einsatzgruppen,Russia,1
+Empire,Austria,1
+Finland,Germany,1
+Japan,Thailand,1
+Iraq,Persia,1
+Germany,Italy,1
+Finland,Romania,1
+France,Austria,1
+France,British Empire,1
+France,China,1
+France,Czechoslovakia,1
+France,India,1
+France,Israel,1
+Hong Kong,Malaya,1
+France,North Korea,1
+France,Poland,1
+France,United States,1
+France,the Russian Empire,1
+Germany,Austria,1
+Germany,Belgrade,1
+Germany,Between Germany,1
+Germany,Budapest,1
+Germany,Japan,1
+France,Pakistan,1
+Germany,North Africa,1
+Germany,Norway,1
+Germany,Prague,1
+Germany,Signed,1
+Germany,Sofia,1
+Germany,Vienna,1
+Germany,Wannsee,1
+Germany,Warsaw,1
+Ghana,Kenya,1
+Great Britain,France,1
+Great Britain,Germany,1
+Great Britain,Russia,1
+Great Britain,United States,1
+Guam,Malaya,1
+Guam,Singapore,1
+Hong Kong,Guam,1
+Germany,Bucharest,1
+Finland,Lithuania,1
+Iran,Russia,1
+Israel,Pakistan,1
+Iraq,Russia,1
+Hungary,British Empire,1
+Hungary,Bulgaria,1
+Hungary,Czechoslovakia,1
+Hungary,East Germany,1
+Hungary,France,1
+Hungary,Poland,1
+Hungary,Romania,1
+Hungary,Albania,1
+Hungary,the Russian Empire,1
+India,Japan,1
+India,North Korea,1
+India,the People's Republic of Bangladesh,1
+Iran,Iraq,1
+Iran,Persia,1
+Israel,North Korea,1
+Israel,South Africa,1
+Hong Kong,Singapore,1
+Colin,Hall,1
+Hungary,Austria,1
+Italy,Between Germany,1
+Italy,Signed,1
+Italy,United States,1
+Japan,Bali,1
+Japan,Between Germany,1
+Japan,China,1
+Albania,Poland,1
+Japan,Guangxi,1
+Japan,Hong Kong,1
+Japan,Malaya,1
+Japan,New Guinea,1
+Japan,Shanghai,1
+Japan,Signed,1
+Japan,Singapore,1
+Colin,Burgess,1
+United Kingdom,United States,1
+Crimea,Russia,1
+Persia,Russia,1
+Omaha Beach,United States,1
+North Korea,Vietnam,1
+North Korea,United States,1
+North Korea,South Korea,1
+Libya,North Africa,1
+Lithuania,Latvia,1
+North Korea,Pakistan,1
+Lithuania,Romania,1
+North Korea,Mongolia,1
+Lithuania,Russia,1
+London,New York: Psychology Press,1
+Luxembourg,Belgium,1
+New Guinea,Timor,1
+M.V.,Keldysh,1
+New Guinea,Burma,1
+Pakistan,the People's Republic of Bangladesh,1
+Philippines,Guam,1
+Vienna,Belgrade,1
+Philippines,Hong Kong,1
+Vienna,Prague,1
+Vienna,Sofia,1
+Vienna,Warsaw,1
+Vietnam,Indochina,1
+Vietnam,Mongolia,1
+Warsaw,Belgrade,1
+Warsaw,Bucharest,1
+Warsaw,Prague,1
+Warsaw,Sofia,1
+West Germany,Japan,1
+Winston,Churchill,1
+Russia,Saint Petersburg,1
+Singapore,Malaya,1
+New Mexico,Los Alamos,1
+Nazi Germany,the United Kingdom,1
+Neville,Wylie,1
+Morocco,Algeria,1
+Netherlands,Luxembourg,1
+Nanjing,Chongqing,1
+Philippines,Singapore,1
+Latvia,Lithuania,1
+Russia,Bucharest,1
+Nazi Germany,United States,1
+Russia,Belarus,1
+Latvia,Romania,1
+Romania,Russia,1
+Poland,France,1
+Quest for Empire,Japan,1
+Libya,Egypt,1
+Poland,Romania,1
+Russia,Belgrade,1
+Latvia,Russia,1
+Poland,United Kingdom,1
+Leningrad,Saint Petersburg,1
+Russia,Budapest,1
+Russia,Czechoslovakia,1
+Latvia,Finland,1
+Philippines,Thailand,1
+Nanjing,Japan,1
+Nanjing,Shanghai,1
+Netherlands,Belgium,1
+Libya,Iran,1
+Philippines,Malaya,1
+Philippines,Japan,1
+Korea,Vietnam,1
+Laos,Vietnam,1
+Russia,Romania,1
+Russia,Prague,1
+Russia,Poland,1
+Russia,Leningrad,1
+Laos,Indochina,1
+Russia,France,1
+Vienna,Bucharest,1
+United States,the United Kingdom,1
+Crimea,Whitehall,1
+United Kingdom,Russia,1
+United States,China,1
+United States,Cuba,1
+United States,Great Britain,1
+Thailand,Hong Kong,1
+United States,Guam,1
+Thailand,Guam,1
+Stalingrad,Germany,1
+Russia,United Kingdom,1
+Russia,United States,1
+Russia,Vienna,1
+Russia,Warsaw,1
+Schultz,Colin,1
+Serwadda,Joseph,1
+Kagaayi,Joseph,1
+Sofia,Belgrade,1
+United States,Australia,1
+United Kingdom,Poland,1
+United States,United Kingdom,1
+United Kingdom,Czechoslovakia,1
+Cuba,China,1
+Cuba,Mongolia,1
+Chongqing,Japan,1
+Japan,United States,1
+Albania,Greece,1
+Kagaayi,Serwadda,1
+Thailand,Malaya,1
+Thailand,Singapore,1
+Timor,Burma,1
+Tokyo,Iwo Jima,1
+Tsar,Russia,1
+Ukraine,Belarus,1
+Ukraine,Leningrad,1
+Ukraine,Russia,1
+Ukraine,Saint Petersburg,1
+Sofia,Bucharest,1
+Sofia,Prague,1
+Solomon Islands,Bali,1
+Solomon Islands,Burma,1
+the Russian Empire,Austria,1
+the Russian Empire,British Empire,1
+the United Kingdom,China,1
+the United Kingdom,France,1
+the United Kingdom,India,1
+the United Kingdom,Israel,1
+the United Kingdom,North Korea,1
+the United Kingdom,Pakistan,1
+Yugoslavia,Bulgaria,1
+United States,India,1
+Yugoslavia,Albania,1
+Whitehall,Russia,1
+United States,North Korea,1
+United States,Pakistan,1
+United States,Philippines,1
+the People's Republic of China,Russia,1
+the Ottoman Empire,Germany,1
+the Low Countries,Paris,1
+Russia,Sofia,1
+Solomon Islands,New Guinea,1
+Solomon Islands,Timor,1
+South Korea,North Korea's,1
+South Korea,United States,1
+Stalin,Russia,1
+Sweden,Germany,1
+United States,Hawaii,1
+the Low Countries,France,1
+United States,Israel,1
+Yugoslavia,East Germany,1
+Yugoslavia,Greece,1
+Yugoslavia,Hungary,1
+Yugoslavia,Poland,1
+Yugoslavia,Romania,1
+the United Kingdom,United States,1
